@@ -3,16 +3,28 @@ from  tkinter import *
 
 import sqlite3
 
-
 class Paciente:
 
     db_name = 'camilla.db'
 
     def __init__(self, window):
+
+
         self.wind = window
         self.wind.title('Administración de información')
 
-        frame1 = LabelFrame(self.wind, font=('arial', 18), text='Buscar pacientes')
+        frame = ttk.Notebook(self.wind)
+        frame.pack()
+
+        pes0 = ttk.Frame(self.wind)
+        pes1 = ttk.Frame(self.wind)
+        pes2 = ttk.Frame(self.wind)
+
+        frame.add(pes0, text="Pacientes")
+        frame.add(pes1, text="Antecedentes")
+        frame.add(pes2, text="Mediciones")
+
+        frame1 = LabelFrame(pes0, font=('arial', 18), text='Buscar pacientes')
         frame1.grid(row=0, column=0, pady=10, padx=10, sticky=N+W+E)
         Label(frame1, font=('arial', 12), text='# de documento').grid(row=1, column=0, pady=10, padx=10 )
         self.documento1 = Entry(frame1)
@@ -22,7 +34,7 @@ class Paciente:
 
 
         # acá se crea el Frame
-        frame = LabelFrame(self.wind, font=('arial', 18), text='Registro de nuevo paciente')
+        frame = LabelFrame(pes0, font=('arial', 18), text='Registro de nuevo paciente')
         frame.grid(row=1, column=0, pady=10)
 
         Label(frame, font=('arial', 12), text='Nombre').grid(row=1, column=0, pady=5, padx=5 )
@@ -57,30 +69,30 @@ class Paciente:
 
         ttk.Button(frame, text="Guardar", command=self.add_pacientes).grid(row=4, column=3, sticky=E)
 
-        frame5 = LabelFrame(self.wind, font=('arial', 18))
+        frame5 = LabelFrame(pes0, font=('arial', 18))
         frame5.grid(row=2, column=2, pady=10, padx=10, sticky=W+E)
         ttk.Button(frame5, text="Cerrar", command=self.cerrar).grid(row=5, column=3, sticky=W+E)
 
 
-        frame2 = LabelFrame(self.wind, font=('arial', 18), text='Antecedentes Personales')
+        frame2 = LabelFrame(pes1, font=('arial', 18), text='Antecedentes Personales')
         frame2.grid(row=0, column=1, pady=10, padx=10, sticky=N+W+E)
         Label(frame2, font=('arial', 12), text='Nombre').grid(row=1, column=0, pady=5, padx=5 )
         self.documento2 = Entry(frame2)
         self.documento2.grid(row=1, column=1)
 
-        frame3 = LabelFrame(self.wind, font=('arial', 18), text='Antecedentes Familiares')
+        frame3 = LabelFrame(pes1, font=('arial', 18), text='Antecedentes Familiares')
         frame3.grid(row=1, column=1, pady=10, padx=10, sticky=N+W+E)
         Label(frame3, font=('arial', 12), text='Nombre').grid(row=1, column=0, pady=5, padx=5 )
         self.documento3 = Entry(frame3)
         self.documento3.grid(row=1, column=1)
 
-        frame4 = LabelFrame(self.wind, font=('arial', 18), text='Antecedentes Toxicológicos')
+        frame4 = LabelFrame(pes1, font=('arial', 18), text='Antecedentes Toxicológicos')
         frame4.grid(row=2, column=1, pady=10, padx=10, sticky=N+W+E)
         Label(frame4, font=('arial', 12), text='Nombre').grid(row=1, column=0, pady=5, padx=5 )
         self.documento4 = Entry(frame4)
         self.documento4.grid(row=1, column=1)
 
-        frame6 = LabelFrame(self.wind, font=('arial', 18), text='Mediciones')
+        frame6 = LabelFrame(pes2, font=('arial', 18), text='Mediciones')
         frame6.grid(row=0, column=2, pady=10, padx=10, sticky=N+W+E, rowspan=3)
 
         Label(frame6, font=('arial', 12), text='Presión Arterial').grid(row=1, column=0, pady=5, padx=5 )
